@@ -18,6 +18,14 @@ module Distribution
 			Sf::fact(@n) / (Sf::fact(k) * Sf::fact(@n - k))
 		end
 
+		def cdf(x)
+			if @k.include?(x)
+				@k.sort[0..@k.sort.index(x)].collect { |k| binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))}.inject(:+) 
+			else
+				0
+			end
+		end
+
 		def mean
 			@n * @p
 		end

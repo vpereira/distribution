@@ -16,4 +16,9 @@ class TestBinomialDsitribution < MiniTest::Unit::TestCase
       d = Distribution::Binomial.new(6,[1,2,3,4,5],0.5)
       assert_equal d.pmf.class,Array
     end
+
+    def test_cdf
+      d = Distribution::Binomial.new(6,[1,2,3,4,5,6],0.3)
+      assert_equal d.cdf(3),0.8118809999999996 
+    end
 end
