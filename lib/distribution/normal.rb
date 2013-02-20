@@ -13,7 +13,5 @@ module Distribution
 		def pdf
 			@x.collect { |x| Ran::gaussian_pdf(x, @o) }
 		end
-
-
 	end
 end
