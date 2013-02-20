@@ -23,7 +23,7 @@ Or install it yourself as:
 
 
     d = Distribution::Binomial.new(6,1,0.3)
-    d.pmf # 0.30252599999
+    d.pmf # [0.30252599999]
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
