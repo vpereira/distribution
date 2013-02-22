@@ -32,5 +32,17 @@ module Distribution
 			@n * @p
 		end
 
+		#we should handle the difference for large/small samples
+		def sigma
+			 sqrt(@n * @q * @q)
+		end
+
+		def to_report
+			puts "trials:#{@n}"
+			puts "random variable #{@k.join(',')}"
+			puts "probability of successes: #{@p}"
+			puts "mean: #{self.mean}"
+			puts "standard deviation #{self.sigma}"
+		end
 	end
 end
