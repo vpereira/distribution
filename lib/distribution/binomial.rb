@@ -7,9 +7,10 @@ module Distribution
 			@n = n
 			@p = p
 			@q = 1 - @p
-			@k = k
+			@k = k.is_a?(Array) ? k : [k]
 		end
 
+		# P(X=x)
 		def pmf
 			@k.collect { |k| binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))	} 
 		end
@@ -18,11 +19,12 @@ module Distribution
 			Sf::fact(@n) / (Sf::fact(k) * Sf::fact(@n - k))
 		end
 
+		# P(X<=x)
 		def cdf(x)
 			if @k.include?(x)
 				@k.sort[0..@k.sort.index(x)].collect { |k| binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))}.inject(:+) 
 			else
-				0
+				pmf.inject(:+)
 			end
 		end
 

@@ -5,7 +5,7 @@ module Distribution
 		def initialize(x = [0], mean = 0.0, stddev = 1.0)
 			@m = mean
 			@o = stddev
-			@x = x
+			@x = x.is_a?(Array) ? x : [x]
 		end
 		def variance
 			@o ** 2
