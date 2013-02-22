@@ -8,10 +8,22 @@ module Distribution
 			@x = x.is_a?(Array) ? x : [x]
 		end
 		def variance
-			@o ** 2
+			pow_int(@o,2)
 		end
 		def pdf
 			@x.collect { |x| Ran::gaussian_pdf(x, @o) }
+		end
+
+		#lower_tail = true
+		#P(X<=X)
+		#lower_tail = false
+		#P(X>=X)
+		def cdf(lower_tail=true)
+			if lower_tail
+				@x.collect { |x| Cdf::gaussian_P(x, @o) }
+			else
+				@x.collect { |x| Cdf::gaussian_Q(x, @o) }
+			end
 		end
 	end
 end
