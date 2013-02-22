@@ -24,7 +24,7 @@ module Distribution
 		end
 
 		# P(X<=x)
-		def cdf(x)
+		def cdf
 			@k.collect { |k| Cdf.binomial_P(k,@p,@n) }
 		end
 
