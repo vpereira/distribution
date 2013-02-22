@@ -25,11 +25,7 @@ module Distribution
 
 		# P(X<=x)
 		def cdf(x)
-			if @k.include?(x)
-				@k[0..@k.index(x)].collect { |k| binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))}.inject(:+) 
-			else
-				pmf.inject(:+)
-			end
+			@k.collect { |k| Cdf.binomial_P(k,@p,@n) }
 		end
 
 		def mean

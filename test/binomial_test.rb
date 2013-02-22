@@ -19,6 +19,6 @@ class TestBinomialDsitribution < MiniTest::Unit::TestCase
 
     def test_cdf
       d = Distribution::Binomial.new(6,[1,2,3,4,5,6],0.3)
-      assert_equal d.cdf(3),0.8118809999999996 
+      assert_equal d.cdf(3),[0.4201749999999991, 0.7443100000000008, 0.9295300000000002, 0.989065, 0.999271, 1.0]
     end
 end
