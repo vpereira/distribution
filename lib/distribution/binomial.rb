@@ -15,6 +15,10 @@ module Distribution
 			@k.collect { |k| binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))	} 
 		end
 
+		def pdf
+			@k.collect { |k| Ran.binomial_pdf(k,@p,@n) }
+		end
+
 		def binomial_coefficient_from_array(k)
 			Sf::fact(@n) / (Sf::fact(k) * Sf::fact(@n - k))
 		end
@@ -22,7 +26,7 @@ module Distribution
 		# P(X<=x)
 		def cdf(x)
 			if @k.include?(x)
-				@k.sort[0..@k.sort.index(x)].collect { |k| binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))}.inject(:+) 
+				@k[0..@k.index(x)].collect { |k| binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))}.inject(:+) 
 			else
 				pmf.inject(:+)
 			end
