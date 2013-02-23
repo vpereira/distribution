@@ -25,7 +25,7 @@ Or install it yourself as:
 
 ### Binomial Distribution
 
-    d = Distribution::Binomial.new(6,1,0.3)
+    d = Distribution::Binomial.new(n=6,k=1,p=0.3)
     d.pmf # [0.30252599999]
     d.cdf(3) #P(X<=3)
     # => [0.4201749999999991, 0.7443100000000008, 0.9295300000000002, 0.989065, 0.999271, 1.0]
