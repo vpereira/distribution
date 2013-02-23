@@ -31,7 +31,7 @@ end
 
 class TestBinomialDistribution2 < MiniTest::Unit::TestCase
   def setup
-    @dist = Distribution::Binomial.new(10,[1,2,3,4,5,6],0.5)
+    @dist = Distribution::Binomial.new(n=10,p=0.5)
   end
 
   def test_sigma
