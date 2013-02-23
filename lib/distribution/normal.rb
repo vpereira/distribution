@@ -5,7 +5,7 @@ module Distribution
 		def initialize(x = [0], mean = 0.0, stddev = 1.0)
 			@m = mean
 			@o = stddev
-			@x = x.is_a?(Array) ? x : [x]
+			@x = Vector.alloc(x)
 		end
 		def variance
 			pow_int(@o,2)
