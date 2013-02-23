@@ -41,4 +41,8 @@ class TestBinomialDistribution2 < MiniTest::Unit::TestCase
   def test_mean
     assert_equal @dist.mean, 5.0 
   end
+
+  def symmetric
+    assert @dist.symmetric?
+  end
 end

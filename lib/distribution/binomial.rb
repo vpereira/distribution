@@ -56,6 +56,10 @@ module Distribution
 			3+(1-6 * @q * @p)/(@n * @q * @p)
 		end
 
+		def symmetric?
+			skewness == 0
+		end
+
 		def to_report
 			puts "trials:#{@n}"
 			puts "random variable #{@k.join(',')}"
