@@ -44,30 +44,26 @@ module Distribution
 			 sqrt(@n * @q * @q)
 		end
 
-		def skew
-			@k.skew		
+		def variance
+			@n * @q * @p
 		end
 
-		def median
-			@k.sort.median_from_sorted_data
-		end
-
-		def quantile
-		    @k.sort.quantile_from_sorted_data
+		def skewness
+			(1 - 2 * @p) / sigma
 		end
 
 		def kurtosis
-			@k.kurtosis
+			3+(1-6 * @q * @p)/(@n * @q * @p)
 		end
 
 		def to_report
 			puts "trials:#{@n}"
 			puts "random variable #{@k.join(',')}"
 			puts "probability of successes: #{@p}"
-			puts "mean: #{self.mean}"
-			puts "standard deviation: #{self.sigma}"
-			puts "skew: #{self.skew}"
-			puts "kurtosis #{self.kurtosis}"
+			puts "mean: #{mean}"
+			puts "standard deviation: #{sigma}"
+			puts "skewness: #{skewness}"
+			puts "kurtosis #{kurtosis}"
 		end
 	end
 end
