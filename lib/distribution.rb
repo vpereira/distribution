@@ -8,5 +8,4 @@ module Distribution
 	autoload :Version,  'distibution/version'
 	autoload :Normal,   'distribution/normal'
 	autoload :Binomial, 'distribution/binomial'
-
 end

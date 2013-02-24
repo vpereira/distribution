@@ -30,6 +30,8 @@ For linux probably there is a package as well.
 
     d = Distribution::Normal.new([1,2,3,4])
     d.pdf # => [0.24197072451914337, 0.05399096651318806, 0.0044318484119380075, 0.00013383022576488537]
+    #get 10 samples. you can use the number that you want like get_100_samples, #get_10000_samples, etc
+    d.get_10_samples #<= [...,..,...,] 
 
 ### Binomial Distribution
 

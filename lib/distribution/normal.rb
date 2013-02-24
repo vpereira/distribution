@@ -37,7 +37,7 @@ module Distribution
 		private 
 		def get_samples(n)
 			rng = GSL::Rng.alloc
-			0.upto(n).collect { @m + GSL::Ran::gaussian(rng, sigma = @o) }
+			1.upto(n).collect { @m + GSL::Ran::gaussian(rng, sigma = @o) }
 		end
 	end
 end
