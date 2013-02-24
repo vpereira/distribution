@@ -16,6 +16,14 @@ Or install it yourself as:
 
     $ gem install distribution
 
+other requirements: gnu plotutls.  
+
+For mac you can install it with the command:
+
+    brew install plotutils
+
+For linux probably there is a package as well.
+
 ## Usage
 
 ### Normal Distribution
