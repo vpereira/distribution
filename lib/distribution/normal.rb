@@ -25,5 +25,19 @@ module Distribution
 				@x.collect { |x| Cdf::gaussian_Q(x, @o) }
 			end
 		end
+
+		def method_missing(method_name, *args, &block)
+			if method_name.to_s =~ /get_(.*)_samples/
+      			get_samples($1.to_i)
+    		else
+      			super
+    		end
+		end
+
+		private 
+		def get_samples(n)
+			rng = GSL::Rng.alloc
+			0.upto(n).collect { @m + GSL::Ran::gaussian(rng, sigma = @o) }
+		end
 	end
 end
