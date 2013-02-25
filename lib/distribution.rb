@@ -1,4 +1,6 @@
 require 'gsl'
+require 'gnuplot'
+
 #because autoload has not relative_path option
 $LOAD_PATH << File.dirname(__FILE__)
 module Distribution
