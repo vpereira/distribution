@@ -2,20 +2,21 @@ module Distribution
 	#implemented just pdf
 	class Normal < BaseDistribution
 		attr_reader :m, :o,:x
-		def initialize(x = [0], mean = 0.0, sigma = 1.0)
-			@m = mean
-			@o = sigma
-			@x = Vector.alloc(x)
+		alias_method :sigma, :o
+		alias_method :mean, :m
+		alias_method :raw_scores, :x
+
+		def initialize(opts = {})
+			@m = opts[:mean] || 0.0
+ 		   	@o = opts[:sigma] || 1.0
+			@x = Vector.alloc( opts[:x] || [0] )
 		end
+
 		def variance
 			pow_int(@o,2)
 		end
 		def pdf
 			@x.collect { |x| Ran::gaussian_pdf(x, @o) }
-		end
-
-		def z_score
-			@x.collect { |r| (r - @m) / @o }
 		end
 
 		#lower_tail = true

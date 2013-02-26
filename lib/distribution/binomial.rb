@@ -3,11 +3,14 @@ module Distribution
 	#you can pass one k (number of successes) or an array
 	class Binomial < BaseDistribution
 		attr_reader :n,:p,:q,:k
-		def initialize(n = 0, k = [0], p = 0.5)
-			@n = n
-			@p = p
+		alias_method :raw_scores,:k
+		def initialize(opts = {})
+			n = 0, k = [0], p = 0.5
+
+			@n = opts[:n] || 0
+			@p = opts[:p] || 0.5
 			@q = 1 - @p
-			@k = Vector.alloc(k)
+			@k =  Vector.alloc( opts[:k] || [0] )
 		end
 
 		# P(X=x)

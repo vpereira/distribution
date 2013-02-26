@@ -6,6 +6,11 @@ $LOAD_PATH << File.dirname(__FILE__)
 module Distribution
 	class BaseDistribution
 		include GSL
+		#TODO
+		#move it to a Mixing module
+		def z_score
+			raw_scores.collect { |r| (r - mean) / sigma }
+		end
 	end
 	autoload :Version,  'distibution/version'
 	autoload :Normal,   'distribution/normal'
