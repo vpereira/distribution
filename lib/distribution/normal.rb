@@ -1,7 +1,8 @@
+
 module Distribution
 	#implemented just pdf
 	class Normal < BaseDistribution
-		attr_reader :m, :o,:x
+		attr_reader :m, :o,:x, :samples
 		alias_method :sigma, :o
 		alias_method :mean, :m
 		alias_method :raw_scores, :x
@@ -10,6 +11,7 @@ module Distribution
 			@m = opts[:mean] || 0.0
  		   	@o = opts[:sigma] || 1.0
 			@x = Vector.alloc( opts[:x] || [0] )
+			@samples = Vector.alloc([0])
 		end
 
 		def variance
@@ -31,18 +33,18 @@ module Distribution
 			end
 		end
 
-		def method_missing(method_name, *args, &block)
-			if method_name.to_s =~ /get_(.*)_samples/
-      			get_samples($1.to_i)
-    		else
-      			super
-    		end
-		end
+		def get_samples(s,c,replacement=false,type=:discrete)
+			r = GSL::Rng.alloc(GSL::Rng::MT19937,rand(10000))
+			@samples = if replacement == true
+				1.upto(s).collect { Distribution::Sample.new(cases: r.sample(get_cases(s,c),c), type: type) }
+			else
+				1.upto(s).collect { Distribution::Sample.new(cases: r.choose(get_cases(s,c),c), type: type ) }
+			end
+		end 
 
-		private 
-		def get_samples(n)
+		def get_cases(n,c)
 			rng = GSL::Rng.alloc
-			1.upto(n).collect { @m + GSL::Ran::gaussian(rng, sigma = @o) }
+			cases = Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(rng, @o).round(3) })
 		end
 	end
 end

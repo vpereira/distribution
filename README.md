@@ -30,9 +30,10 @@ For linux probably there is a package as well.
 
     d = Distribution::Normal.new([1,2,3,4])
     d.pdf # => [0.24197072451914337, 0.05399096651318806, 0.0044318484119380075, 0.00013383022576488537]
-    #get 10 samples. you can use the number that you want like get_100_samples, #get_10000_samples, etc
-    d.get_10_samples #<= [...,..,...,] 
-
+    d.get_samples(10,30) # 10 samples with 30 cases each without replacement and discrete
+    d.get_samples(10,30,true,:continuous) #10 samples with 30 cases each, with replacement and continuous
+    d.samples # Array of Sample objects
+    
 ### Binomial Distribution
 
     d = Distribution::Binomial.new(n=6,k=1,p=0.3)
