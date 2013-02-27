@@ -34,17 +34,21 @@ module Distribution
 		end
 
 		def get_samples(s,c,replacement=false,type=:discrete)
-			r = GSL::Rng.alloc(GSL::Rng::MT19937,rand(10000))
+			
 			@samples = if replacement == true
-				1.upto(s).collect { Distribution::Sample.new(cases: r.sample(get_cases(s,c),c), type: type) }
+				1.upto(s).collect { Distribution::Sample.new(cases: random_handle.sample(get_cases(s,c),c), type: type) }
 			else
-				1.upto(s).collect { Distribution::Sample.new(cases: r.choose(get_cases(s,c),c), type: type ) }
+				1.upto(s).collect { Distribution::Sample.new(cases: random_handle.choose(get_cases(s,c),c), type: type ) }
 			end
 		end 
 
 		def get_cases(n,c)
-			rng = GSL::Rng.alloc
-			cases = Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(rng, @o).round(3) })
+			cases = Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(random_handle, @o).round(3) })
+		end
+
+		private
+		def random_handle
+			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
 		end
 	end
 end
