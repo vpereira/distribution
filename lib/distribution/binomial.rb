@@ -63,6 +63,10 @@ module Distribution
 			skewness == 0
 		end
 
+		def get_samples(num_of_samples)
+			1.upto(num_of_samples).collect { GSL::Ran::binomial(random_handle,@p,@n) }
+		end
+		
 		def to_report
 			puts "trials:#{@n}"
 			puts "random variable #{@k.join(',')}"
@@ -71,6 +75,11 @@ module Distribution
 			puts "standard deviation: #{sigma}"
 			puts "skewness: #{skewness}"
 			puts "kurtosis #{kurtosis}"
+		end
+
+		private
+		def random_handle
+			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
 		end
 	end
 end

@@ -28,7 +28,7 @@ For linux probably there is a package as well.
 
 ### Normal Distribution
 
-    d = Distribution::Normal.new([1,2,3,4])
+    d = Distribution::Normal.new(mean:0,sigma:1,x:[1,2,3,4])
     d.pdf # => [0.24197072451914337, 0.05399096651318806, 0.0044318484119380075, 0.00013383022576488537]
     d.get_samples(10,30) # 10 samples with 30 cases each without replacement and discrete
     d.get_samples(10,30,true,:continuous) #10 samples with 30 cases each, with replacement and continuous
@@ -36,7 +36,7 @@ For linux probably there is a package as well.
     
 ### Binomial Distribution
 
-    d = Distribution::Binomial.new(n=6,k=1,p=0.3)
+    d = Distribution::Binomial.new(n:6,k:1,p:0.3)
     d.pmf # [0.30252599999]
     d.cdf(3) #P(X<=3)
     # => [0.4201749999999991, 0.7443100000000008, 0.9295300000000002, 0.989065, 0.999271, 1.0]
