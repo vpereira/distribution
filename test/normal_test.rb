@@ -14,5 +14,3 @@ class TestNormalDsitribution < MiniTest::Unit::TestCase
       #assert_equal d.get_100_samples.size,100
     end
 end
-
- 

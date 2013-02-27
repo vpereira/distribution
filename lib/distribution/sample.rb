@@ -15,7 +15,7 @@ module Distribution
 		end
 
 		def sigma
-			@cases.sd.round(3)
+			@cases.sd(mean).round(3)
 		end
 
 		def median
@@ -23,7 +23,7 @@ module Distribution
 		end
 
 		def n
-			@cases.length
+			@cases.length.to_f
 		end
 	end
 end
