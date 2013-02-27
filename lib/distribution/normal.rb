@@ -35,11 +35,16 @@ module Distribution
 
 		def get_samples(s,c,replacement=false,type=:discrete)
 			
-			@samples = if replacement == true
-				1.upto(s).collect { Distribution::Sample.new(cases: random_handle.sample(get_cases(s,c),c), type: type) }
+			replacement_method = if replacement
+				:sample
 			else
-				1.upto(s).collect { Distribution::Sample.new(cases: random_handle.choose(get_cases(s,c),c), type: type ) }
+				:choose
 			end
+			
+			@samples = 1.upto(s).collect do 
+				Distribution::Sample.new(cases: random_handle.send(replacement_method,get_cases(s,c),c), type: type) 
+			end
+			@samples
 		end 
 
 		def get_cases(n,c)
