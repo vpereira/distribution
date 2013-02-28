@@ -6,6 +6,7 @@ module Distribution
 		def initialize(opts = {})
 			@mean = opts[:mean]
 			@k =  Vector.alloc( opts[:k] || [0] )
+			@precision = opts[:precision] || 3
 		end
 
 		def pdf
@@ -18,7 +19,7 @@ module Distribution
 			else
 				:poisson_Q
 			end
-			@k.collect { |k| Cdf.send(method_to_call,k, @mean.to_f).round(3) }
+			@k.collect { |k| Cdf.send(method_to_call,k, @mean.to_f).round(@precision) }
 		end
 
 		def sigma
@@ -26,11 +27,11 @@ module Distribution
 		end
 
 		def kurtosis
-			(3 + 1/@mean.to_f).round(3)
+			(3 + 1/@mean.to_f).round(@precision)
 		end
 
 		def skewness
-			(1/sqrt(@mean.to_f)).round(3)
+			(1/sqrt(@mean.to_f)).round(@precision)
 		end
 
 	end
