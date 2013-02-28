@@ -5,8 +5,6 @@ module Distribution
 		attr_reader :n,:p,:q,:k
 		alias_method :raw_scores,:k
 		def initialize(opts = {})
-			n = 0, k = [0], p = 0.5
-
 			@n = opts[:n] || 0
 			@p = opts[:p] || 0.5
 			@q = 1 - @p
