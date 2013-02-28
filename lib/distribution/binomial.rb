@@ -7,6 +7,7 @@ module Distribution
 		def initialize(opts = {})
 			@n = opts[:n] || 0
 			@p = opts[:p] || 0.5
+			@precision = opts[:precision] || 3
 			@q = 1 - @p
 			@k =  Vector.alloc( opts[:k] || [0] )
 		end
@@ -17,11 +18,11 @@ module Distribution
 		end
 
 		def pdf
-			@k.collect { |k| Ran.binomial_pdf(k,@p,@n) }
+			@k.collect { |k| Ran.binomial_pdf(k,@p,@n).round(@precision) }
 		end
 
 		def binomial_coefficient_from_array(k)
-			Sf::fact(@n) / (Sf::fact(k) * Sf::fact(@n - k))
+			(Sf::fact(@n) / (Sf::fact(k) * Sf::fact(@n - k))).round(@precision)
 		end
 
 		#lower_tail = true
@@ -30,9 +31,9 @@ module Distribution
 		# P(X<=x)
 		def cdf(lower_tail = true)
 			if lower_tail == true
-				@k.collect { |k| Cdf.binomial_P(k,@p,@n) }
+				@k.collect { |k| Cdf.binomial_P(k,@p,@n).round(@precision) }
 			else
-				@k.collect { |k| Cdf.binomial_Q(k,@p,@n) }
+				@k.collect { |k| Cdf.binomial_Q(k,@p,@n).round(@precision) }
 			end
 		end
 
@@ -50,11 +51,11 @@ module Distribution
 		end
 
 		def skewness
-			(1 - 2 * @p) / sigma
+			((1 - 2 * @p) / sigma).round(@precision)
 		end
 
 		def kurtosis
-			3+(1-6 * @q * @p)/(@n * @q * @p)
+			(3+(1-6 * @q * @p)/(@n * @q * @p)).round(@precision)
 		end
 
 		def symmetric?

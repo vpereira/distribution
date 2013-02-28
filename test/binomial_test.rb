@@ -19,12 +19,12 @@ class TestBinomialDistribution1 < MiniTest::Unit::TestCase
 
     def test_cdf
       d = Distribution::Binomial.new(n:6,k:[1,2,3,4,5,6],p:0.3)
-      assert_equal d.cdf,GSL::Vector.alloc([0.4201749999999991, 0.7443100000000008, 0.9295300000000002, 0.989065, 0.999271, 1.0])
+      assert_equal d.cdf,GSL::Vector.alloc([0.420, 0.744, 0.930, 0.989, 0.999, 1.0])
     end
 
     def test_pdf
       d = Distribution::Binomial.new(n:6,k:[1,2,3,4,5,6],p:0.3)
-      assert_equal d.pdf, GSL::Vector.alloc([0.30252600000000013, 0.32413499999999995, 0.18522000000000008, 0.05953499999999999, 0.010206, 0.0007289999999999991])
+      assert_equal d.pdf, GSL::Vector.alloc([0.303, 0.324, 0.185, 0.060, 0.0100, 0.001])
     end
 end
 

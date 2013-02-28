@@ -11,6 +11,7 @@ module Distribution
 			@m = opts[:mean] || 0.0
  		   	@o = opts[:sigma] || 1.0
 			@x = Vector.alloc( opts[:x] || [0] )
+			@precision = opts[:precision] || 3
 			@samples = Vector.alloc([0])
 		end
 

@@ -12,6 +12,7 @@ module Distribution
 			@distribution = opts[:distribution] # [:normal,:binomial,:poisson,:t]
 			@cases = @type == :discrete ? GSL::Vector.alloc(opts[:cases].round.to_a) : opts[:cases]
 			@population_n = opts[:population] || :unknown
+			@precision = opts[:precision] || 3
 		end
 
 		def t
@@ -24,15 +25,15 @@ module Distribution
 		end
 
 		def mean
-			@cases.mean.round(3)
+			@cases.mean.round(@precision)
 		end
 
 		def sigma
-			@cases.sd(mean).round(3)
+			@cases.sd(mean).round(@precision)
 		end
 
 		def median
-			@cases.median.round(3)
+			@cases.median.round(@precision)
 		end
 
 		def n
