@@ -17,6 +17,7 @@ module Distribution
 		def variance
 			pow_int(@o,2)
 		end
+		
 		def pdf
 			@x.collect { |x| Ran::gaussian_pdf(x, @o) }
 		end
