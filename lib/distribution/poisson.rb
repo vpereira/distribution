@@ -9,7 +9,7 @@ module Distribution
 		end
 
 		def pdf
-			@k.collect { |k|  GSL::Ran.poisson_pdf(k,@mean.to_f) }
+			@k.collect { |k|  GSL::Ran.poisson_pdf(k,@mean.to_f).round(3) }
 		end
 
 		def cdf(lower_tail=true)
@@ -18,7 +18,7 @@ module Distribution
 			else
 				:poisson_Q
 			end
-			@k.collect { |k| Cdf.send(method_to_call,k, @mean.to_f) }
+			@k.collect { |k| Cdf.send(method_to_call,k, @mean.to_f).round(3) }
 		end
 
 		def sigma
@@ -26,11 +26,11 @@ module Distribution
 		end
 
 		def kurtosis
-			3 + 1/@mean.to_f
+			(3 + 1/@mean.to_f).round(3)
 		end
 
 		def skewness
-			1/sqrt(@mean.to_f)
+			(1/sqrt(@mean.to_f)).round(3)
 		end
 
 	end
