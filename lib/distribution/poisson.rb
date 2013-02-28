@@ -26,11 +26,11 @@ module Distribution
 		end
 
 		def kurtosis
-			pow_int(@mean,-1)
+			3 + 1/@mean.to_f
 		end
 
 		def skewness
-			pow_int(@mean,0.5)
+			1/sqrt(@mean.to_f)
 		end
 
 	end
