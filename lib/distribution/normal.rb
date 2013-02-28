@@ -52,7 +52,7 @@ module Distribution
 		end 
 
 		def get_cases(n,c)
-			cases = Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(random_handle, @o).round(3) })
+			cases = Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(random_handle, @o).round(@precision) })
 		end
 
 		private
