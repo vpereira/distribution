@@ -20,7 +20,7 @@ module Distribution
 		end
 		
 		def pdf
-			@x.collect { |x| Ran::gaussian_pdf(x, @o) }
+			@x.collect { |x| Ran::gaussian_pdf(x, @o).round(@precision) }
 		end
 
 		#lower_tail = true
@@ -28,13 +28,12 @@ module Distribution
 		#lower_tail = false
 		#P(X>=X)
 		def cdf(lower_tail=true)
-
 			method_to_call = if lower_tail
 				:gaussian_P
 			else
 				:gaussian_Q
 			end
-			@x.collect { |x| Cdf.send(method_to_call,x, @o) }
+			@x.collect { |x| Cdf.send(method_to_call,x, @o).round(@precision) }
 		end
 
 		def get_samples(s,c,replacement=false,type=:discrete)
