@@ -24,6 +24,11 @@ For mac you can install it with the command:
 
 For linux probably there is a package as well.
 
+
+## Status
+
+[![Build Status](https://travis-ci.org/vpereira/distribution.png)](https://travis-ci.org/vpereira/distribution)
+
 ## Usage
 
 ### Normal Distribution
