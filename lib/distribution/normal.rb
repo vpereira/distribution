@@ -50,11 +50,16 @@ module Distribution
 			@samples
 		end 
 
+		def random_variable_of_means
+			Vector.alloc(@samples.collect { |x| x.median })
+		end
+
 		def get_cases(n,c)
 			cases = Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(random_handle, @o).round(@precision) })
 		end
 
 		private
+
 		def random_handle
 			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
 		end

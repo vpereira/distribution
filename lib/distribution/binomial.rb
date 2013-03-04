@@ -30,11 +30,14 @@ module Distribution
 		#lower_tail = false
 		# P(X<=x)
 		def cdf(lower_tail = true)
-			if lower_tail == true
-				@k.collect { |k| Cdf.binomial_P(k,@p,@n).round(@precision) }
+
+			method_to_call = if lower_tail
+				:binomial_P
 			else
-				@k.collect { |k| Cdf.binomial_Q(k,@p,@n).round(@precision) }
+				:binomial_Q
 			end
+
+			@k.collect { |k| Cdf.send(method_to_call,k,@p,@n).round(@precision) }
 		end
 
 		def mean
