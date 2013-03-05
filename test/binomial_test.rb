@@ -45,4 +45,9 @@ class TestBinomialDistribution2 < MiniTest::Unit::TestCase
   def symmetric
     assert @dist.symmetric?
   end
+
+  def test_histogram
+      @dist.get_samples(10,30)
+      assert_equal @dist.hist.class, GSL::Histogram
+  end
 end
