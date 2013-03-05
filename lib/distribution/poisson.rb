@@ -34,5 +34,23 @@ module Distribution
 			(1/sqrt(@mean.to_f)).round(@precision)
 		end
 
+		def get_samples(s,c,replacement=false,type=:discrete)
+			
+			replacement_method = if replacement
+				:sample
+			else
+				:choose
+			end
+
+			@samples = 1.upto(s).collect do 
+				Distribution::Sample.new(cases: random_handle.send(replacement_method,get_cases(s,c),c), type: type) 
+			end
+			@samples
+			
+		end 
+
+		def get_cases(n,c)
+			Vector.alloc(1.upto(n * c).collect { GSL::Ran::poisson(random_handle,@mean) })
+		end
 	end
 end
