@@ -12,14 +12,11 @@ module Distribution
 			@samples = Vector.alloc(100)
 		end
 
-
 		def hist(data_to_hist=[])
 			@hist = Histogram.new data:data_to_hist
 			@hist.gen
 		end
 
-		#TODO
-		#move it to a Mixing module
 		def z_score
 			raw_scores.collect { |r| (r - mean) / sigma }
 		end
