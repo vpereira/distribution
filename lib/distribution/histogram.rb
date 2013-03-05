@@ -1,4 +1,5 @@
 module Distribution
+	class HistogramUnkownException < Exception;end
 	class Histogram
 		attr_accessor :data
 		attr_reader :hist
@@ -15,7 +16,13 @@ module Distribution
 		end
 
 		def plot
-			hist.graph
+			raise HistogramUnkownException,"You didn't call gen before" if @hist.nil?
+			@hist.graph
+		end
+
+		def mean
+			raise HistogramUnkownException,"You didn't call gen before" if @hist.nil?
+			@hist.mean
 		end
 	end
 end
