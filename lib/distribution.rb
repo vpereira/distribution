@@ -12,16 +12,6 @@ module Distribution
 			@samples = Vector.alloc(100)
 		end
 
-		def X(using=:mean)
-			Vector.alloc(@samples.collect { |x| x.send(:mean) })
-		end
-
-		def hist
-			@hist = GSL::Histogram.alloc(self.X.to_a.size)
-			@hist.set_ranges_uniform(self.X.to_a.min,self.X.to_a.max)
-			@hist.fill(self.X.round.to_a)
-			@hist
-		end
 
 		#TODO
 		#move it to a Mixing module
@@ -34,9 +24,10 @@ module Distribution
 			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
 		end
 	end
-	autoload :Version,  'distibution/version'
-	autoload :Normal,   'distribution/normal'
-	autoload :Binomial, 'distribution/binomial'
-	autoload :Poisson,  'distribution/poisson'
-	autoload :Sample,   'distribution/sample'
+	autoload :Version,   'distibution/version'
+	autoload :Normal,    'distribution/normal'
+	autoload :Binomial,  'distribution/binomial'
+	autoload :Poisson,   'distribution/poisson'
+	autoload :Sample,    'distribution/sample'
+	autoload :Histogram, 'distribution/histogram'
 end
