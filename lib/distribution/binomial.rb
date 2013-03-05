@@ -26,6 +26,10 @@ module Distribution
 			(Sf::fact(@n) / (Sf::fact(k) * Sf::fact(@n - k))).round(@precision)
 		end
 
+		def hist(data_to_hist=@samples.first.cases)
+			super(data_to_hist)
+		end
+
 		#lower_tail = true
 		# P(X<=x)
 		#lower_tail = false

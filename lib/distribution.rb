@@ -13,6 +13,11 @@ module Distribution
 		end
 
 
+		def hist(data_to_hist=[])
+			@hist = Histogram.new data:data_to_hist
+			@hist.gen
+		end
+
 		#TODO
 		#move it to a Mixing module
 		def z_score

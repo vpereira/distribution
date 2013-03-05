@@ -23,6 +23,7 @@ module Distribution
 			@x.collect { |x| Ran::gaussian_pdf(x, @o).round(@precision) }
 		end
 
+
 		#lower_tail = true
 		#P(X<=X)
 		#lower_tail = false
@@ -41,8 +42,7 @@ module Distribution
 		end
 
 		def hist(data_to_hist=self.X.round.to_a)
-			@hist = Histogram.new data:data_to_hist
-			@hist.gen
+			super(data_to_hist)
 		end
 
 		def get_samples(s,c,replacement=false,type=:discrete)
