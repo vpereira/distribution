@@ -2,7 +2,7 @@
 module Distribution
 	#implemented just pdf
 	class Normal < BaseDistribution
-		attr_reader :m, :o,:x, :samples,:hist
+		attr_reader :m, :o,:x
 		alias_method :sigma, :o
 		alias_method :mean, :m
 		alias_method :raw_scores, :x
@@ -12,7 +12,7 @@ module Distribution
  		   	@o = opts[:sigma] || 1.0
 			@x = Vector.alloc( opts[:x] || [0] )
 			@precision = opts[:precision] || 3
-			@samples = Vector.alloc([0])
+			super(opts)
 		end
 
 		def variance
@@ -50,25 +50,8 @@ module Distribution
 			@samples
 		end 
 
-		def X(using=:mean)
-			Vector.alloc(@samples.collect { |x| x.send(:mean) })
-		end
-
 		def get_cases(n,c)
-			cases = Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(random_handle, @o).round(@precision) })
-		end
-
-		def hist
-			@hist = GSL::Histogram.alloc(self.X.to_a.size)
-			@hist.set_ranges_uniform(self.X.round.to_a.min,self.X.round.to_a.max)
-			@hist.fill(self.X.round.to_a)
-			@hist
-		end
-
-		private
-
-		def random_handle
-			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
+			Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(random_handle, @o).round(@precision) })
 		end
 	end
 end

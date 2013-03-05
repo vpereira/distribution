@@ -10,6 +10,7 @@ module Distribution
 			@precision = opts[:precision] || 3
 			@q = 1 - @p
 			@k =  Vector.alloc( opts[:k] || [0] )
+			super(opts)
 		end
 
 		# P(X=x)
@@ -65,9 +66,25 @@ module Distribution
 			skewness == 0
 		end
 
-		def get_samples(num_of_samples)
-			1.upto(num_of_samples).collect { GSL::Ran::binomial(random_handle,@p,@n) }
+		def get_samples(num_of_samples,number_of_cases,replacement=false,type=:discrete)
+
+			replacement_method = if replacement
+				:sample
+			else
+				:choose
+			end
+
+			@samples = 1.upto(num_of_samples).collect do 
+				Distribution::Sample.new(cases: random_handle.send(replacement_method,get_cases(num_of_samples,
+					number_of_cases),number_of_cases), type: type) 
+			end
+			@samples
 		end
+
+		def get_cases(n,c)
+			Vector.alloc(1.upto(n * c).collect { GSL::Ran::binomial(random_handle,@p,@n) })
+		end
+
 		
 		def to_report
 			puts "trials:#{@n}"
@@ -77,11 +94,6 @@ module Distribution
 			puts "standard deviation: #{sigma}"
 			puts "skewness: #{skewness}"
 			puts "kurtosis #{kurtosis}"
-		end
-
-		private
-		def random_handle
-			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
 		end
 	end
 end
