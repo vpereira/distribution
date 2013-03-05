@@ -10,7 +10,7 @@ module Distribution
 		end
 
 		def pdf
-			@k.collect { |k|  GSL::Ran.poisson_pdf(k,@mean.to_f).round(3) }
+			@k.collect { |k|  GSL::Ran.poisson_pdf(k,@mean.to_f).round(@precision) }
 		end
 
 		def cdf(lower_tail=true)
