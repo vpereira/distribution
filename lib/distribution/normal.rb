@@ -40,11 +40,9 @@ module Distribution
 			Vector.alloc(@samples.collect { |x| x.send(:mean) })
 		end
 
-		def hist
-			@hist = GSL::Histogram.alloc(self.X.to_a.size)
-			@hist.set_ranges_uniform(self.X.to_a.min-0.1,self.X.to_a.max+0.1)
-			@hist.fill(self.X.round.to_a)
-			@hist
+		def hist(data_to_hist=self.X.round.to_a)
+			@hist = Histogram.new data:data_to_hist
+			@hist.gen
 		end
 
 		def get_samples(s,c,replacement=false,type=:discrete)
