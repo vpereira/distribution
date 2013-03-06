@@ -14,7 +14,7 @@ class TestBinomialDistribution1 < MiniTest::Unit::TestCase
 
     def test_random_variable
       d = Distribution::Binomial.new(n:6,k:[1,2,3,4,5],p:0.5)
-      assert_equal d.pmf.class,GSL::Vector
+      assert_instance_of GSL::Vector,d.pmf
     end
 
     def test_cdf
@@ -48,6 +48,6 @@ class TestBinomialDistribution2 < MiniTest::Unit::TestCase
 
   def test_histogram
       @dist.get_samples(10,30)
-      assert_equal @dist.hist.class, GSL::Histogram
+      assert_instance_of GSL::Histogram,@dist.hist
   end
 end

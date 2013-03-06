@@ -8,11 +8,16 @@ class TestHistogram < MiniTest::Unit::TestCase
 	end
 
 	def test_gen
-		assert_equal @hist.gen.class, GSL::Histogram
+		assert_instance_of GSL::Histogram,@hist.gen
 	end
 
 	def test_plot
-		assert @hist.respond_to?(:plot)
+		assert_respond_to @hist,:plot
+	end
+
+
+	def test_exception_mean
+		assert_raises(Distribution::HistogramUnkownException) { @hist.mean }
 	end
 
 	def test_mean
