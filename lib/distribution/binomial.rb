@@ -68,21 +68,6 @@ module Distribution
 			skewness == 0
 		end
 
-		def get_samples(num_of_samples,number_of_cases,replacement=false,type=:discrete)
-
-			replacement_method = if replacement
-				:sample
-			else
-				:choose
-			end
-
-			@samples = 1.upto(num_of_samples).collect do 
-				Distribution::Sample.new(cases: random_handle.send(replacement_method,get_cases(num_of_samples,
-					number_of_cases),number_of_cases), type: type) 
-			end
-			@samples
-		end
-
 		def get_cases(n,c)
 			Vector.alloc(1.upto(n * c).collect { GSL::Ran::binomial(random_handle,@p,@n) })
 		end

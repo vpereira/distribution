@@ -21,6 +21,24 @@ module Distribution
 			raw_scores.collect { |r| (r - mean) / sigma }
 		end
 
+		def get_samples(s,c,replacement=false,type=:discrete)
+			
+			replacement_method = if replacement
+				:sample
+			else
+				:choose
+			end
+
+			@samples = 1.upto(s).collect do 
+				Distribution::Sample.new(cases: random_handle.send(replacement_method,get_cases(s,c),c), type: type) 
+			end
+			@samples
+		end 
+
+		def get_cases(s,c)
+			raise NotImplementedError,"you must implement it get_cases"
+		end
+		
 		private
 		def random_handle
 			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
