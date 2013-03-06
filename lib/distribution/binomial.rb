@@ -1,6 +1,4 @@
 module Distribution
-	#just PMF is implemented
-	#you can pass one k (number of successes) or an array
 	class Binomial < BaseDistribution
 		attr_reader :n,:p,:q,:k
 		alias_method :raw_scores,:k
