@@ -13,7 +13,7 @@ module Distribution
 
 		# P(X=x)
 		def pmf
-			@k.collect { |k| binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))	} 
+			@k.collect { |k| (binomial_coefficient_from_array(k) * (pow_int(@p, k) * pow_int(@q,(@n-k)))).round(@precision)	} 
 		end
 
 		def pdf
