@@ -12,10 +12,6 @@ class TestBinomialDistribution1 < MiniTest::Unit::TestCase
       assert_equal d.mean,6*0.3
     end
 
-    def test_random_variable
-      d = Distribution::Binomial.new(n:6,k:[1,2,3,4,5],p:0.5)
-      assert_instance_of GSL::Vector,d.pmf
-    end
 end
 
 class TestBinomialDistribution3 < MiniTest::Unit::TestCase
@@ -30,6 +26,11 @@ class TestBinomialDistribution3 < MiniTest::Unit::TestCase
   def test_pdf
     assert_equal @d.pdf, GSL::Vector.alloc([0.303, 0.324, 0.185, 0.060, 0.0100, 0.001])
   end
+  
+  def test_random_variable
+    assert_instance_of GSL::Vector,@d.pmf
+  end
+  
 end
 
 class TestBinomialDistribution2 < MiniTest::Unit::TestCase
