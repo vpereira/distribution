@@ -41,6 +41,10 @@ module Distribution
 			Vector.alloc(@samples.collect { |x| x.send(:mean) })
 		end
 
+		def standard_error
+			self.X.sd
+		end
+
 		def hist(data_to_hist=self.X.round.to_a)
 			super(data_to_hist)
 		end
