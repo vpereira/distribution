@@ -48,6 +48,7 @@ module Distribution
 	autoload :Normal,    'distribution/normal'
 	autoload :Binomial,  'distribution/binomial'
 	autoload :Poisson,   'distribution/poisson'
+	autoload :T,         'distribution/t'
 	autoload :Sample,    'distribution/sample'
 	autoload :Histogram, 'distribution/histogram'
 end
