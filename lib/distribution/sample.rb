@@ -6,6 +6,7 @@ module Distribution
 		include GSL
 
 		attr_accessor :cases
+		attr_reader :distribution
 
 		def initialize(opts = {})
 			@type = opts[:type] || :discrete # :discrete | :continuous 

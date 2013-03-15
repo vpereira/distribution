@@ -30,7 +30,8 @@ module Distribution
 			end
 
 			@samples = 1.upto(s).collect do 
-				Distribution::Sample.new(cases: random_handle.send(replacement_method,get_cases(s,c),c), type: type) 
+				Distribution::Sample.new(cases: random_handle.send(replacement_method,get_cases(s,c),c), 
+					type: type, distribution: name_to_distribution) 
 			end
 			@samples
 		end 
@@ -40,6 +41,11 @@ module Distribution
 		end
 		
 		private
+		
+		def name_to_distribution
+			self.class.to_s.split('::').last.downcase.to_sym
+		end
+
 		def random_handle
 			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
 		end

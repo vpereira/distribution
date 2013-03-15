@@ -17,7 +17,14 @@ class TestNormalDsitribution < MiniTest::Unit::TestCase
 
   def test_histogram
     	@d.get_samples(10,30)
-    	assert_equal @d.hist.class, GSL::Histogram
+      assert_instance_of GSL::Histogram,@d.hist
+  end
+
+  def test_samples
+      @d.get_samples(1,10)
+      assert_instance_of Array, @d.samples
+      assert_instance_of Distribution::Sample, @d.samples.first
+      assert_equal @d.samples.first.distribution,:normal
   end
   
 end

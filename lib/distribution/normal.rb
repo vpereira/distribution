@@ -48,7 +48,6 @@ module Distribution
 		def hist(data_to_hist=self.X.round.to_a)
 			super(data_to_hist)
 		end
-
 		
 		def get_cases(n,c)
 			Vector.alloc(1.upto(n*c).collect { @m + GSL::Ran::gaussian(random_handle, @o).round(@precision) })
