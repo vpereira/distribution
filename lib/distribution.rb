@@ -50,11 +50,12 @@ module Distribution
 			GSL::Rng.alloc(GSL::Rng::MT19937,rand(31337))
 		end
 	end
-	autoload :Version,   'distibution/version'
-	autoload :Normal,    'distribution/normal'
-	autoload :Binomial,  'distribution/binomial'
-	autoload :Poisson,   'distribution/poisson'
-	autoload :T,         'distribution/t'
-	autoload :Sample,    'distribution/sample'
-	autoload :Histogram, 'distribution/histogram'
+	autoload :Version,    'distibution/version'
+	autoload :Normal,     'distribution/normal'
+	autoload :Binomial,   'distribution/binomial'
+	autoload :Poisson,    'distribution/poisson'
+	autoload :Exponential,'distribution/exponential'
+	autoload :T,          'distribution/t'
+	autoload :Sample,     'distribution/sample'
+	autoload :Histogram,  'distribution/histogram'
 end
