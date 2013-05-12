@@ -18,7 +18,13 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.add_development_dependency('minitest')
   gem.add_development_dependency('pry')
-  gem.add_dependency('gsl')
+
+  if RUBY_PLATFORM =~ /java/
+    gem.platform = 'java'
+    gem.files << 'lib/common_maths/commons-math3-3.2.jar'
+  else
+    gem.add_dependency('gsl')
+  end
   gem.add_dependency('rake')
   #gem.add_dependency('numbers_in_words')
   gem.add_dependency('gnuplot')
