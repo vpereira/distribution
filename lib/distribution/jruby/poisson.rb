@@ -1,29 +1,24 @@
 require_relative './distribution'
-java_import 'org.apache.commons.math3.distribution.BinomialDistribution'
+java_import 'org.apache.commons.math3.distribution.PoissonDistribution'
 
 module Distribution
-	class Binomial
-		attr_reader :n,:p,:q,:k,:rng
-		def initialize(opts = {})
-			opts = {:n=>1,:p=>0.5,:precision=>3,:k=>[0]}.merge(opts)
-			@n = opts[:n]
-			@p = opts[:p]
-			@rng = opts[:rng]
-			@precision = opts[:precision]
-			@q = 1 - @p
-			@k =  opts[:k]
+	class Poisson
+		attr_accessor :k
+		attr_reader :mean
+		
+		include Distribution::Utils
 
-			@d_handle = if opts[:rng]
-				BinomialDistribution.new(opts[:n],opts[:p])
-			else
-				BinomialDistribution.new(opts[:rng],opts[:n],opts[:p])
-			end
-			@d_handle
+		def initialize(opts = {})
+			@mean = opts[:mean] || 1
+			@k =  opts[:k] || [0]
+			@precision = opts[:precision] || 3
+			@d_handle = PoissonDistribution.new(@mean)
 		end
 
 		def pmf
 			@k.collect { |k|  @d_handle.probability(k).round(@precision)	} 
 		end
+
 		#TODO
 		#refactor the if block: repetition
 		def cdf(lower_tail = true)
@@ -35,6 +30,17 @@ module Distribution
 		end
 		def mean
 			@d_handle.get_numerical_mean.round(@precision)
+		end
+		def sigma
+			sqrt(@mean)
+		end
+
+		def kurtosis
+			(3 + 1/@mean.to_f).round(@precision)
+		end
+
+		def skewness
+			(1/sqrt(@mean.to_f)).round(@precision)
 		end
 	end
 end
