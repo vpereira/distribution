@@ -4,3 +4,6 @@ before_install:
 language: ruby
 rvm:
   - "1.9.3-p392"
+branches:
+  only:
+    - master
