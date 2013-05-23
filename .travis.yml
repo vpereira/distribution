@@ -1,6 +1,9 @@
 before_install:
  - sudo apt-get update -qq
- - sudo apt-get install -qq build-essential libgsl0-dev plotutils gnuplot
+ - sudo apt-get install -qq build-essential libgsl0-dev plotutils gnuplot libatlas-base-dev
 language: ruby
 rvm:
-  - "1.9.3"
+  - "1.9.3-p392"
+branches:
+  only:
+    - master
