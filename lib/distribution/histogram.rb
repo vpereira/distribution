@@ -1,3 +1,5 @@
+#TODO
+#as soon as we are ready with testing, remove it from here
 require 'gnuplot'
 # the class use gnuplot to calculate frequency and draw a histogram 
 # limitations: the step is the same in this code. it can not be used to draw histogram with different steps.
@@ -14,6 +16,7 @@ module Distribution
       @fix_boxes_offset = step.to_f / 2.0
       @x = [@min + @fix_boxes_offset]
       max = values.max
+      #thats don't belong to initialize
       while @x[-1] <= (max - @fix_boxes_offset)
         @x << @x[-1] + step
       end
@@ -23,6 +26,16 @@ module Distribution
       values.each{|i| push i}
     end
  
+ 	#TODO 
+ 	#move some code from initialize to here
+ 	def gen
+ 	end
+
+ 	#TODO
+ 	#implement mean
+ 	def mean
+ 	end
+
     def push(x)
       @bins[h_class([[@min,x].max, @max].min)]+=1
     end
