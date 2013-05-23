@@ -19,7 +19,6 @@ module Distribution
       end
       @max = @x[-1] 
       @step = step
-      #Y are the bins
       @bins = Array.new(h_class(@max)+1, 0)
       values.each{|i| push i}
     end
