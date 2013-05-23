@@ -1,6 +1,9 @@
 require 'gnuplot'
 # the class use gnuplot to calculate frequency and draw a histogram 
 # limitations: the step is the same in this code. it can not be used to draw histogram with different steps.
+#TODO 
+#add support to save to file in different formats
+#refactor the initialize method
 module Distribution
   class Histogram
   	attr_reader :bins
@@ -42,7 +45,7 @@ module Distribution
 	 	plot.xlabel opts[:x_lab]
 	 	plot.ylabel opts[:y_lab]
 	 	plot.style  opts[:style]
-	 	
+
 	 	plot.data = [  
 	      Gnuplot::DataSet.new([@x, @bins]) do |ds|
 	        ds.with = "boxes"
