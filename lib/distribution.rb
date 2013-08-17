@@ -4,7 +4,7 @@ module Distribution
 
 	#TODO
 	#one for jruby and one for mri
-	include './base_distribution'
+	autoload :BaseDistribution, 'distribution/base_distribution'
 
 	autoload :Version,    'distibution/version'
 
