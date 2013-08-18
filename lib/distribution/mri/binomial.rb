@@ -49,7 +49,7 @@ module Distribution
 
 		#we should handle the difference for large/small samples
 		def sigma
-			 sqrt(@n * @q * @q)
+			 sqrt(@n * @p * @q)
 		end
 
 		def variance

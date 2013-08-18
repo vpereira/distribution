@@ -11,7 +11,7 @@ class TestExponentialDistribution < MiniTest::Unit::TestCase
 	def test_1
 		assert_equal @d.pdf.first, 0.134
 		assert_equal @d.cdf.first, 0.33
-		assert_equal @d.cdf(false).first, 0.67
+		assert_equal @d.cdf(false).first.round(2), 0.67
 	end
 
 end

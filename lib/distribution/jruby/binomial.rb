@@ -3,6 +3,8 @@ java_import 'org.apache.commons.math3.distribution.BinomialDistribution'
 
 module Distribution
 	class Binomial
+                include Distribution::Utils
+
 		attr_reader :n,:p,:q,:k,:rng
 
 		def initialize(opts = {})
@@ -34,6 +36,11 @@ module Distribution
 			end
 			@k.collect { |k|  self.send(method_to_call,k).round(@precision)	}
 		end
+
+
+                def sigma
+                        sqrt(@n * @q * @p)
+                end
 
 		def mean
 			@d_handle.get_numerical_mean.round(@precision)
