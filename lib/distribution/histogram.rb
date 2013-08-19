@@ -12,7 +12,7 @@ module Distribution
   	attr_accessor :step 
     # array is the raw data, step is used when calculate frequency
     def initialize(opts={})
-      @data = opts[:values] || [0]
+      @data = opts[:data] || [0]
       @step = opts[:step] || 5
       @min = (@data.min - 0.5).round
       @fix_boxes_offset = @step / 2.0
@@ -20,14 +20,14 @@ module Distribution
    end
  
     def gen
-      while @x[-1] <= (values.max - @fix_boxes_offset)
-        @x << @x[-1] + step
+      while @x[-1] <= (@data.max - @fix_boxes_offset)
+        @x << @x[-1] + @step
       end
       @max = @x[-1] 
-      @step = step
+      @step = @step
       @bins = Array.new(h_class(@max)+1, 0)
       #push data to bins
-      values.each{|i| push i}
+      @data.each{|i| push i}
      end
 
     #TODO

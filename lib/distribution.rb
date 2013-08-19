@@ -8,7 +8,7 @@ module Distribution
 
 	autoload :Version,    'distibution/version'
         #for now we have a native ruby histogram implementation
-	autoload :Histogram,  'distribution/jruby/histogram'
+	autoload :Histogram,  'distribution/histogram'
 
 	if RUBY_PLATFORM =~ /java/
 	  autoload :Binomial,   'distribution/jruby/binomial'
