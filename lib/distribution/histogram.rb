@@ -7,6 +7,7 @@ require 'gnuplot'
 #add support to save to file in different formats
 #refactor the initialize method
 module Distribution
+  class HistogramUnkownException < StandardError;end
   class Histogram
   	attr_reader :bins
   	attr_accessor :step 
@@ -33,6 +34,10 @@ module Distribution
     #TODO
     #implement mean
     def mean
+      raise Distribution::HistogramUnkownException  unless @bins
+      #slow we should build it around
+      #http://commons.apache.org/proper/commons-math/apidocs/org/apache/commons/math3/stat/descriptive/DescriptiveStatistics.html
+      @data.inject{ |sum, el| sum + el }.to_f / @data.size
     end
 
     def push(x)
