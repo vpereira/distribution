@@ -16,7 +16,9 @@ module Distribution
 		def pdf
 			@k.collect { |k| @d_handle.density(k).round(@precision) }
 		end
-		
+
+		# TODO
+                # remove repetition
 		def cdf(lower_tail=true)
 			if lower_tail
 				@k.collect { |k|      @d_handle.cumulative_probability(k).round(@precision) }

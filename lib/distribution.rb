@@ -7,6 +7,8 @@ module Distribution
 	autoload :BaseDistribution, 'distribution/base_distribution'
 
 	autoload :Version,    'distibution/version'
+        #for now we have a native ruby histogram implementation
+	autoload :Histogram,  'distribution/jruby/histogram'
 
 	if RUBY_PLATFORM =~ /java/
 	  autoload :Binomial,   'distribution/jruby/binomial'
@@ -19,6 +21,5 @@ module Distribution
 	  autoload :Exponential,'distribution/mri/exponential'
 	  autoload :T,          'distribution/mri/t'
 	  autoload :Sample,     'distribution/mri/sample'
-	  autoload :Histogram,  'distribution/mri/histogram'
         end
 end
