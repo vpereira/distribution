@@ -9,12 +9,7 @@ module Distribution
 			@nu = opts[:nu] || 0 #degrees of freedom
 			@precision = opts[:precision] || 3
 			@x =  opts[:x] || [0] 
-			@d_handle = if opts[:precision]
-				TDistribution.new(@nu,@precision)
-			else
-				TDistribution.new(@nu)
-			end
-			@d_handle
+			@d_handle = TDistribution.new(@nu)
 		end
 
 		def pdf
@@ -25,7 +20,7 @@ module Distribution
                   if lower_tail
 			@x.collect { |x| @d_handle.cumulativeProbability(x).round(@precision) }
                   else
-			@x.collect { |x| 1 - @d_handle.cumulativeProbability(x).round(@precision) }
+			@x.collect { |x| (1 - @d_handle.cumulativeProbability(x)).round(@precision) }
                   end
 		end
 	end

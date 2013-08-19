@@ -14,6 +14,7 @@ module Distribution
 	  autoload :Binomial,   'distribution/jruby/binomial'
 	  autoload :Exponential,'distribution/jruby/exponential'
 	  autoload :Poisson,    'distribution/jruby/poisson'
+	  autoload :T,          'distribution/jruby/t'
 	else
 	  autoload :Normal,     'distribution/mri/normal'
 	  autoload :Binomial,   'distribution/mri/binomial'
